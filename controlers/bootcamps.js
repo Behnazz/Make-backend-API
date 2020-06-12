@@ -58,15 +58,14 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
   if (endIndex < total) {
     pagination.next = {
       page: page + 1,
-      limit 
-    }
+      limit,
+    };
   }
   if (startIndex > 0) {
     pagination.prev = {
-      page : page - 1,
-      limit
-    }
-    
+      page: page - 1,
+      limit,
+    };
   }
   res.status(200).json({
     success: true,
