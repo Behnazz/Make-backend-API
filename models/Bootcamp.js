@@ -99,9 +99,10 @@ const BootcampSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    //relationship and reference to a user
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User', //reference to Bootcamp Model
+      ref: 'User', //reference to User Model
       required: true,
     },
   },

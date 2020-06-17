@@ -37,6 +37,12 @@ const CourseSchema = new mongoose.Schema({
     ref: 'Bootcamp', //reference to Bootcamp Model
     required: true,
   },
+  //relationship and reference to a user
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User', //reference to Bootcamp Model
+    required: true,
+  },
 });
 
 //static in mongoose apply directly to model
