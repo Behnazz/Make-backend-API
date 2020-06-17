@@ -99,6 +99,11 @@ const BootcampSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -132,14 +137,14 @@ BootcampSchema.pre('save', async function (next) {
 
 //cascade delete courses when a bootcamp is deleted
 BootcampSchema.pre('remove', async function (next) {
-  console.log(`courses removed${this._id}`)
-  await this.model('Course').deleteMany({ bootcamp: this._id })
-  next()
-})
+  console.log(`courses removed${this._id}`);
+  await this.model('Course').deleteMany({ bootcamp: this._id });
+  next();
+});
 
 //reverse populate with virtuals (adding the model we want to bootcamoschema) we want to get an array of courses
 BootcampSchema.virtual('courses', {
-  ref: 'Course',//model
+  ref: 'Course', //model
   localField: '_id',
   foreignField: 'bootcamp',
   justOne: false,
