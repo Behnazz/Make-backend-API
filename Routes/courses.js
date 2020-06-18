@@ -8,10 +8,10 @@ const {
 } = require('../controlers/courses');
 
 const Course = require('../models/Course');
-const advancedResults = require('../middleware/advancedResults');
 
 const router = express.Router({ mergeParams: true }); //so the reroute works here
 
+const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth'); //to protect some routes
 
 router
