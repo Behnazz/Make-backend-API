@@ -1,5 +1,5 @@
 const express = require('express');
-const { getReviews, getReview, addReview } = require('../controlers/reviews');
+const { getReviews, getReview, addReview, updateReview, deleteReview } = require('../controlers/reviews');
 
 const Review = require('../models/Review');
 
@@ -7,6 +7,7 @@ const router = express.Router({ mergeParams: true }); //so the reroute works her
 
 const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth'); //to protect some routes
+
 
 router
   .route('/')
@@ -19,5 +20,10 @@ router
   )
   .post(protect, authorize('user', 'admin'), addReview);
 
-router.route('/:id').get(getReview);
+router
+  .route('/:id')
+  .get(getReview)
+  .put(protect, authorize('user', 'admin'), updateReview)
+  .delete (protect, authorize('user', 'admin'), deleteReview)
+
 module.exports = router;
