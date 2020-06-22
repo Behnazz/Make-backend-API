@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cors = require('cors')
 const rateLimit = require('express-rate-limit');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
@@ -59,6 +60,9 @@ const limiter = rateLimit({
   max: 100
 })
 app.use(limiter);
+
+//enable CORS
+app.use(cors());
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
